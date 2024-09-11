@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedSegment" color="primary">
+      <ion-segment-button value="nao-adquiridos">
+        Não Adquiridos
+      </ion-segment-button>
+      <ion-segment-button value="adquiridos">
+        Adquiridos
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="listar-itens-container">
+    <ion-card class="listar-itens-card">
+      <!-- Lista de Não-Adquiridos -->
+      <div class="table-container" *ngIf="selectedSegment === 'nao-adquiridos'">
+        <h2>Não Adquiridos</h2>
+        <div class="table-header">
+          <span class="header-item">Produto</span>
+          <span class="header-item">Qtd</span>
+          <span class="header-item">Valor</span>
+        </div>
+        <ion-list class="scrollable-content">
+          <ion-item-sliding *ngFor="let item of itens">
+            <ion-item> 
+              <ion-checkbox slot="start"></ion-checkbox>
+              <div class="item-details">
+                <span class="item-name">{{ item.nome }}</span>
+                <span class="item-quant">{{ item.quant }}</span>
+                <span class="item-value">
+                  <span class="currency-symbol">R$ </span>
+                  {{ item.valor }}
+                </span>
+              </div>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="danger" (click)="alertExcluirProduto(item)">Remover</ion-item-option>
+              <ion-item-option color="primary">Editar</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+
+      <!-- Lista de Adquiridos -->
+      <div class="table-container" *ngIf="selectedSegment === 'adquiridos'">
+        <h2>Adquiridos</h2>
+        <div class="table-header">
+          <span class="header-item">Produto</span>
+          <span class="header-item">Qtd</span>
+          <span class="header-item">Valor</span>
+        </div>
+        <ion-list class="scrollable-content">
+          <ion-item-sliding>
+            <ion-item>
+              <div class="item-details">
+                <span class="item-name"></span>
+                <span class="item-quant"></span>
+                <span class="item-value">
+                  <span class="currency-symbol"></span>
+                  
+                </span>
+              </div>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="primary">Restituir</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item>
+            <div class="total-lista">
+              <strong>Total da Lista:</strong>
+              <span> R$ </span>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="paginaAdicionarItem()">
+      +
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

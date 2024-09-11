@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listar-itens"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="cadastro-container">
+    <ion-card class="cadastro-card">
+
+      <form (submit)="cadastrarProduto()">
+
+        <ion-text>
+          <h2>Cadastrar Item</h2>
+          <p>Preencha todos os campos para cadastror um novo produto!</p>
+        </ion-text>
+
+        <ion-item>
+          <ion-label position="floating">Produto</ion-label>
+          <ion-input type="text" [(ngModel)]="produto" name="produto" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Quantidade</ion-label>
+          <ion-input type="number" [(ngModel)]="quantidade" name="qtd" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Preço</ion-label>
+          <ion-input type="number" [(ngModel)]="preco" name="preco" required></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" color="danger">Cadastrar</ion-button>
+
+      </form>
+
+    </ion-card>
+  </div>
+</ion-content>

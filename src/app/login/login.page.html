@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedSegment" color="primary">
+      <ion-segment-button value="logar">
+        Logar
+      </ion-segment-button>
+      <ion-segment-button value="criar-conta">
+        Criar Conta
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="login-container">
+    <ion-card class="login-card">
+      <!-- Formulário para Logar -->
+      <form *ngIf="selectedSegment === 'logar'" (submit)="login()">
+        <ion-text>
+          <h2>Seja bem-vindo!</h2>
+          <p>Preencha os campos abaixo para acessar a sua conta.</p>
+        </ion-text>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+        </ion-item>
+
+        <ion-item> 
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input [type]="verSenha ? 'text' : 'password'" [(ngModel)]="senha" name="senha" required></ion-input>
+          <ion-icon slot="end" [name]="verSenha ? 'eye-off-outline' : 'eye-outline'" (click)="toggleVisibilidadeSenha()"></ion-icon>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" color="danger">Logar</ion-button>
+      </form>
+
+      <!-- Formulário para Criar Conta -->
+      <form *ngIf="selectedSegment === 'criar-conta'" (submit)="criarConta()">
+        <ion-text>
+          <h2>Criar conta</h2>
+          <p>Cadastre-se preenchendo os campos abaixo.</p>
+        </ion-text>
+
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input type="text" [(ngModel)]="nome" name="nome" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="emailCriar" name="emailCriar" required></ion-input>
+        </ion-item> 
+
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input [type]="verSenha ? 'text' : 'password'" [(ngModel)]="senhaCriar" name="senhaCriar" required></ion-input>
+          <ion-icon slot="end" [name]="verSenha ? 'eye-off-outline' : 'eye-outline'" (click)="toggleVisibilidadeSenha()"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Confirmar Senha</ion-label>
+          <ion-input [type]="verSenha ? 'text' : 'password'" [(ngModel)]="confirmarSenha" name="confirmarSenha" required></ion-input>
+          <ion-icon slot="end" [name]="verSenha ? 'eye-off-outline' : 'eye-outline'" (click)="toggleVisibilidadeSenha()"></ion-icon>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" color="danger">Criar Conta</ion-button>
+      </form>
+    </ion-card>
+  </div>
+</ion-content>
