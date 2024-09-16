@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
           });
           toast.present();
 
-          this.rota.navigate(['/home']);
+          this.rota.navigate(['/listar-itens']);
           this.limparCamposLogin();
 
         } else {

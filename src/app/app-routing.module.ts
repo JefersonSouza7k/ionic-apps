@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'adicionar-item',
     loadChildren: () => import('./adicionar-item/adicionar-item.module').then( m => m.AdicionarItemPageModule)
+  },
+  {
+    path: 'editar-item',
+    loadChildren: () => import('./editar-item/editar-item.module').then( m => m.EditarItemPageModule)
   },
 ];
 

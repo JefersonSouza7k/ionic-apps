@@ -121,22 +121,6 @@ export class ConexaoApiService {
 
   }
 
-  atualizarStatusAdquirido(id: number, adquirido: boolean) {
-    const data = new FormData();
-
-    data.append('data', JSON.stringify({
-      action: 'atualizarStatusAdquirido',
-      id: id,
-      adquirido: adquirido
-    }));
-
-    return fetch('http://localhost/producao/app-compras/api/api.php', {
-      method: 'POST',
-      body: data
-    })
-    .then(response => response.json());
-  }
-
   excluirProduto(id : number) {
     const body = {
       'action' : 'excluirProduto',
@@ -153,6 +137,101 @@ export class ConexaoApiService {
     .then(response => response.json())
     .then(data => {
       return data
+    });
+  }
+
+    obterProdutoPorId(id: number): Promise<any> {
+    const body = {
+      action: 'obterProdutoPorId',
+      id: id
+    };
+
+    let bodyFd = new FormData();
+    bodyFd.append('data', JSON.stringify(body));
+
+    return fetch(this.api_url, {
+      method: 'POST',
+      body: bodyFd
+    })
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erro ao obter os dados do produto: ', error);
+      throw error;
+    });
+  }
+
+    atualizarProduto(id: number, nome: string, quantidade: number, preco: number): Promise<any> {
+    const body = {
+      action: 'editarProduto',
+      id: id,
+      produto: nome,
+      qtd: quantidade,
+      preco: preco
+    };
+
+    let bodyFd = new FormData();
+    bodyFd.append('data', JSON.stringify(body));
+
+    return fetch(this.api_url, {
+      method: 'POST',
+      body: bodyFd
+    })
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erro ao atualizar o produto: ', error);
+      throw error;
+    });
+  }
+
+  marcarComoAdquirido(id: number): Promise<any> {
+    const body = {
+      action : 'marcarAdquirido',
+      id: id
+    };
+
+    let bodyFd = new FormData();
+    bodyFd.append('data', JSON.stringify(body));
+
+    return fetch(this.api_url, {
+      method: 'POST',
+      body: bodyFd
+    })
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erro ao marcar produto como adquirido: ', error);
+      throw error;
+    });
+  }
+
+  marcarComoNaoAdquirido(id: number): Promise<any> {
+    const body = {
+      action: 'marcarNaoAdquirido',
+      id: id
+    };
+
+    let bodyFd = new FormData();
+    bodyFd.append('data', JSON.stringify(body));
+
+    return fetch(this.api_url, {
+      method: 'POST',
+      body: bodyFd
+    })
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erro ao marcar produto como não adquirido: ', error);
+      throw error;
     });
   }
 

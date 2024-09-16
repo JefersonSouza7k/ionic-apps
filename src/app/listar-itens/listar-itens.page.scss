@@ -119,3 +119,27 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 8px;
 }
+.total-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-top: 2px solid #7a6400;
+    /* Borda superior para destacar */
+    border-radius: 8px;
+    /* Canto arredondado para combinar com o card */
+    font-size: 20px;
+    /* Aumenta o tamanho da fonte */
+    font-weight: bold;
+    /* Deixa o texto em negrito */
+    color: #7a6400;
+    /* Cor da fonte combinando com o tema */
+}
+
+.total-lista .valor-total {
+    font-size: 24px;
+    /* Tamanho maior para destacar o total */
+    color: #FF0000;
+    /* Cor vermelha para destacar o total */
+}

@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button slot="start" defaultHref="/listar-itens"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="cadastro-container">
+    <ion-card class="cadastro-card">
+  
+      <form #form="ngForm" (ngSubmit)="atualizarProduto()">
+  
+        <ion-text>
+          <h2>Editar Produto</h2>
+          <p>Preencha todos os campos para cadastror um novo produto!</p>
+        </ion-text>
+  
+        <ion-item>
+          <ion-label position="floating">Produto</ion-label>
+          <ion-input type="text" name="nomeProduto" [(ngModel)]="nomeProduto" required></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Quantidade</ion-label>
+          <ion-input type="number" name="quantidade" [(ngModel)]="quantidade" required></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Preço</ion-label>
+          <ion-input type="number" name="preco" [(ngModel)]="preco" required></ion-input>
+        </ion-item>
+  
+        <ion-button expand="full" type="submit" color="danger">Salvar Alterações</ion-button>
+  
+      </form>
+  
+    </ion-card>
+  </div>
+</ion-content>

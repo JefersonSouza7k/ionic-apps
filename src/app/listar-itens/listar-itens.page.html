@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons>
+      <ion-button slot="start" (click)="logout()">Logoff</ion-button>
+    </ion-buttons>
     <ion-segment [(ngModel)]="selectedSegment" color="primary">
       <ion-segment-button value="nao-adquiridos">
         Não Adquiridos
@@ -25,22 +28,26 @@
         <ion-list class="scrollable-content">
           <ion-item-sliding *ngFor="let item of itens">
             <ion-item> 
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" [checked]="item.adquirido" (ionChange)="onCheckboxChange($event, item)"></ion-checkbox>
               <div class="item-details">
                 <span class="item-name">{{ item.nome }}</span>
                 <span class="item-quant">{{ item.quant }}</span>
                 <span class="item-value">
                   <span class="currency-symbol">R$ </span>
-                  {{ item.valor }}
+                  {{ item.valor | number: '1.2-2' }}
                 </span>
               </div>
             </ion-item>
             <ion-item-options side="end">
               <ion-item-option color="danger" (click)="alertExcluirProduto(item)">Remover</ion-item-option>
-              <ion-item-option color="primary">Editar</ion-item-option>
+              <ion-item-option color="primary" (click)="editarItem(item)">Editar</ion-item-option>
             </ion-item-options>
-          </ion-item-sliding>
+          </ion-item-sliding> 
         </ion-list>
+        <div class="total-lista">
+          <strong>Total da Lista:</strong>
+          <span> R$ {{ totalValor | number: '1.2-2' }} </span>
+        </div>
       </div>
 
       <!-- Lista de Adquiridos -->
@@ -52,28 +59,27 @@
           <span class="header-item">Valor</span>
         </div>
         <ion-list class="scrollable-content">
-          <ion-item-sliding>
+          <ion-item-sliding *ngFor="let item of itensAdquiridos">
             <ion-item>
+              <ion-checkbox slot="start" [checked]="true"></ion-checkbox>
               <div class="item-details">
-                <span class="item-name"></span>
-                <span class="item-quant"></span>
+                <span class="item-name">{{ item.nome }}</span>
+                <span class="item-quant">{{ item.quant }}</span>
                 <span class="item-value">
-                  <span class="currency-symbol"></span>
-                  
+                  <span class="currency-symbol">R$ </span>
+                  {{ item.valor | number: '1.2-2' }}
                 </span>
               </div>
             </ion-item>
             <ion-item-options side="end">
-              <ion-item-option color="primary">Restituir</ion-item-option>
+              <ion-item-option color="primary" (click)="restituirItem(item)">Restituir</ion-item-option>
             </ion-item-options>
           </ion-item-sliding>
-          <ion-item>
-            <div class="total-lista">
-              <strong>Total da Lista:</strong>
-              <span> R$ </span>
-            </div>
-          </ion-item>
         </ion-list>
+        <div class="total-lista">
+          <strong>Total da Lista:</strong>
+          <span> R$ {{ totalValorAdquiridos | number: '1.2-2' }} </span>
+        </div>
       </div>
     </ion-card>
   </div>
